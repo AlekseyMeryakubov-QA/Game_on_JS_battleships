@@ -6,6 +6,7 @@ var guess;
 var hits = 0;
 var guesses = 0;
 var isSunk = false;
+var arrayHit = [];
 
 while (isSunk == false) {
 	guess = prompt("Привет! Это мини игра морской бой :) Представь, что в 7 ячейках по горизонтали ••••••• (от нуля до шести) расположен 3-ёх палубный корабль врага. Твоя задача потопить его за меньшее кол-во попыток. Стреляй! (введи число 0-6):");
@@ -13,15 +14,20 @@ while (isSunk == false) {
 		alert("Введи валидное значение 0-6");
 	} else {
 		guesses = guesses + 1;
-		if (guess == location1 || guess == location2 || guess == location3) {
-			alert("Попал! Так держать!");
-			hits = hits + 1;
-			if (hits == 3) {
+		if (arrayHit.indexOf(guess) == -1) {
+			if (guess == location1 || guess == location2 || guess == location3) {
+				arrayHit.push(guess);
+				alert("Попал!Так держать!");
+				hits = hits + 1;
+				if (hits == 3) {
 				isSunk = true;
-				alert("Корабль потоплен");
+				alert("Ура!Корабль потоплен!");
+				}
+			} else {
+				alert("Мимо!");
 			}
 		} else {
-			alert("Мимо");
+			alert("Ты уже сюда стрелял!");
 		}
 	}
 }
